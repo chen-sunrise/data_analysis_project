@@ -1,0 +1,19 @@
+ 编程题 
+
+  使用基于 tcp 协议的编程模型实现将 UserMessage 类型对象由客户端发送给服务器； 
+
+  服 务 器接 收到 对象 后判 断 用户 对象 信息 是否 为 "admin" 和 "123456"， 若 是则 将 UserMessage 对象中的类型改为"success"，否则将类型改为"fail"并回发给客户端，客户 端接收到服务器发来的对象后判断并给出登录成功或者失败的提示。 
+
+  其中 UserMessage 类的特征有：类型(字符串类型) 和 用户对象(User 类型)。 
+
+  其中 User 类的特征有：用户名、密码(字符串类型)。 
+
+  如： 
+
+                UserMessage tum = new UserMessage("check", new User("admin", "123456"));  
+
+作业：
+1.客户端端以UserMessage对象发送给服务端，UserMessage需要进行序列化处理操作
+2.服务端接收客户端发送过来的UserMessage对象，提取出User对象。再对User对象的username,password属性进行检验，若符合则修改
+接收过来UserMessage对象的type属性为success，否则修改fail,最后将修改后的UserMessage对象发送给客户端
+3.客户端对服务端发过来的UserMessage对象的type属性进行校验，若为success这输出用户登录成功，否则登录失败。
