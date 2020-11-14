@@ -1,0 +1,103 @@
+-- 查询练习
+ #1.查询所有的商品
+ select * from tableName;
+ #2.查询商品名和商品价格
+ select goodName,goodPrice from tableName;
+ #3.别名查询.使用的关键字是as（as可以省略的）
+ select * from tableName as f where f.id = 1;
+ #4.查询商品价格，对价格去除重复；
+ select distinct goodPrice from tableName;
+ #5.查询结果是表达式（运算查询）：将所有商品的价格+10元进行显示.
+ select goodPrice+10 from tableName;
+ #6.查询商品名称为“花花公子”的商品所有信息：
+ select * from tableName where goodName = '花花公子';
+ #7.查询价格为800商品
+ select * from tableName where goodPrice = 800;
+ #8.查询价格不是800的所有商品
+ select * from tableName where goodPrice != 800;
+ #9.查询商品价格大于60元的所有商品信息
+ select * from tableName where goodPrice > 60;
+ #10.查询商品价格在200到1000之间所有商品
+ select * from tableName where goodPrice between (200, 1000);
+ #11.查询商品价格是200或800的所有商品
+ select * from tableName where goodPrice in (200, 800);
+ #12.查询含有'霸'字的所有商品
+ select * from tableName where goodName = '%霸%';
+ #13.查询以'香'开头的所有商品
+ select * from tableName where goodName = '香%';
+ #14.查询第二个字为'想'的所有商品
+ select * from tableName where goodName = '_想%';
+ #15.商品没有分类的商品
+ #16.查询有分类的商品
+
+-- 排序练习：
+  #1.使用价格对商品信息排序(降序)
+     -- 提示：使用order by语句
+  select * from tableName order by goodPrice desc;
+  #2.在价格排序(降序)的基础上，以主键排序(降序)
+      -- 提示：若价格相同，相同价格的数据以pid降序排序
+  select * from tableName order by goodPrice desc, pid desc;
+  #3.显示商品的价格(去重复)，并排序(降序)
+      -- 提示：DISTINCT 关键字去重
+  select distinct goodPrice from tableName order by desc;
+
+-- 聚合函数/分组函数练习：
+
+    #1 查询商品的总条数(两种方式)
+    -- 提示：使用count()
+    select count(*) from tableName;
+    select count(pid) from tableName;
+    #2 查看price商品的总价格
+        -- 提示：使用sum();
+    select sum(price) from tableName;
+    #3 查看price的最大值和最小值
+        -- 提示：使用max()  min()
+    select max(price),min(price) from tableName;
+    #4 查看price的平均值
+        -- 提示：使用 AVG()
+    select avg(price) from tableName;
+    #5 查询价格大于200商品的总条数
+        -- 提示：使用 COUNT(*)统计条数
+    select count(*) from tableName where price > 200;
+
+-- 分组练习：
+
+    #1 统计各个分类商品的个数
+    select count(pid) from tableName group by goodType;
+    #2 统计各个分类商品的个数,且只显示个数大于1的信息
+    select count(pid) from tableName group by goodType having count(pid) > 1;
+
+插入数据
+
+    1) 查询工资最高的员工是谁？
+    select * from tableName where salary = (select max(salary) from tableName);
+    2) 查询工资小于平均工资的员工有哪些？
+    select * from tableName where salary < (select avg(salary) from tableName);
+    3) 查询大于5000的员工，来至于哪些部门，输出部门的名字
+    select departmentName as '部门名称' from tableName where salary > 5000;
+    4) 查询开发部与财务部所有的员工信息，分别使用子查询和表连接实现
+    select e.name,e.age from employee e where e.did = (select id from department where departmentName in ('财务部', '开发部'));
+    select e.name,e.age,d.departmentName from employee e, department d where e.did = d.id;
+    5) 查询2011年以来入职的员工信息和部门信息，分别使用子查询和表连接实现
+    select e.name,e.age from employee e where e.did = (select id from department where joinDate < 2011);
+    select e.name,e.age,d.departmentName from employee e, department d where e.did = d.id and d.joinDate < 2011;
+
+第一题
+
+    -- 1、查询平均成绩大于70分的同学的学号,姓名,和平均成绩
+    select sid,name,avg(score) from student where avg(score) > 70;
+
+    -- 1.1 分组查询每个学生的 学号,姓名,平均分
+    select sid,name,avg(score) from student group by name;
+
+    -- 1.2 增加条件：平均成绩大于70
+    select sid,name,avg(score) from student group by name having avg(score) > 70;
+
+第二题
+
+    -- 2. 查询所有同学的学号、姓名、选课数、总成绩
+    select sid,name,count(cid),sum(score) from Student;
+    -- 2.1 需要查询两张表 student表和 student_course表
+    select
+    -- 2.2 需要使用 student_id 学号字段,进行分组
+    -- 2.3 需要使用到 count函数 sum函数
