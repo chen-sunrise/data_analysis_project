@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <div id="app">
+            <table border="1px" width="50%" height="450px" align="center" cellspacing="0">
+                <tbody>
+                    <tr>
+                        <th></th>
+                        <th>书籍名称</th>
+                        <th>出版日期</th>
+                        <th>价格</th>
+                        <th>操作数量</th>
+                        <th>操作</th>
+                    </tr>
+                    <tr align="center" v-show="isShow_1">
+                        <td width="10%">1</td>
+                        <td>《java编程思想》</td>
+                        <td>2020-9</td>
+                        <td>￥{{price_1}}</td>
+                        <td><button type="button" @click="add(1)">+</button>
+                            {{number_1}}
+                        <button  type="button" @click="sub(1)">-</button></td>
+                        <td><button type="button" @click="remove(1)">移除</button></td>
+                    </tr>
+                    <tr align="center"  v-show="isShow_2">
+                        <td width="10%">2</td>
+                        <td>《数据分析于数据原理》</td>
+                        <td>2019-2</td>
+                        <td>￥{{price_2}}</td>
+                        <td><button type="button" @click="add(2)">+</button>
+                            {{number_2}}
+                        <button  type="button" @click="sub(2)">-</button></td>
+                        <td><button type="button" @click="remove(2)">移除</button></td>
+                    </tr>
+                    <tr align="center" v-show="isShow_3">
+                        <td width="10%">3</td>
+                        <td>《Hadoop权威指南》</td>
+                        <td>2019-10</td>
+                        <td>￥{{price_3}}</td>
+                        <td><button type="button" @click="add(3)">+</button>
+                            {{number_3}}
+                        <button  type="button" @click="sub(3)">-</button></td>
+                        <td><button type="button" @click="remove(3)">移除</button></td>
+                    </tr>
+                    <tr align="center" v-show="isShow_4">
+                        <td width="10%">4</td>
+                        <td>《java编程思想》</td>
+                        <td>2018-8</td>
+                        <td>￥{{price_4}}</td>
+                        <td><button type="button" @click="add(4)">+</button>
+                            {{number_4}}
+                        <button  type="button" @click="sub(4)">-</button></td>
+                        <td><button type="button" @click="remove(4)">移除</button></td>
+                    </tr>
+                </tbody>
+                
+            </table> 
+            <h2 align="cellspacing">总价格：￥{{price_1*number_1 + price_2*number_2 + price_3*number_3 + price_4*number_4}}</h2>      
+        </div>
+</body>
+<script>
+    var app = new Vue({
+        el: "#app",
+        data: {
+            price_1 : 98.00,
+            price_2 : 39.00,
+            price_3 : 59.00,
+            price_4 : 128.00,
+            number_1 : 1,
+            number_2 : 1,
+            number_3 : 1,
+            number_4 : 1,
+            isShow_1: true,
+            isShow_2: true,
+            isShow_3: true,
+            isShow_4: true,
+        },
+        methods:{
+            add:function(num){
+                if(num == 1)
+                this.number_1 += 1;
+                if(num == 2)
+                this.number_2 += 1;
+                if(num == 3)
+                this.number_3 += 1;
+                if(num == 4)
+                this.number_4 += 1;
+            },
+            sub:function(num){
+                if(num == 1)
+                this.number_1 -= 1;
+                if(num == 2)
+                this.number_2 -= 1;
+                if(num == 3)
+                this.number_3 -= 1;
+                if(num == 4)
+                this.number_4 -= 1;
+            },
+            remove:function(num){
+                if(num == 1)
+                this.isShow_1 = false;
+                if(num == 2)
+                this.isShow_2 = false;
+                if(num == 3)
+                this.isShow_3 = false;
+                if(num == 4)
+                this.isShow_4 = false;
+            }
+        }
+    })
+</script>
+</html>
