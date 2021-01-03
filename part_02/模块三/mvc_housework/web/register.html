@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+</head>
+<body>
+    <div id="add user">
+        <h1>Register</h1>
+        <form action="/mvc_housework/register" method="post">
+            <input type="text" required="required" placeholder="用户名" name="username"><br>
+            <input type="password" required="required" placeholder="密码" name="password"><br>
+            <input type="radio"  checked="checked" required="required" placeholder="性别" id="man" name="gender">男
+            <input type="radio" required="required" placeholder="性别" id="women" name="gender">女<br>
+            <span>出生日期:</span><input type="date" required="required" value="2014-01-13" name="birth"><br>
+            <button class="button" type="submit">添加</button>
+        </form>
+    </div>
+</body>
+</html>
