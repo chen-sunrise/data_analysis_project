@@ -1,0 +1,14 @@
+### 作业一 ###
+CREATE TABLE `t_department` ( `dept_id` int(11) NOT NULL auto_increment COMMENT '部门号', `dept_name` varchar(64) NOT NULL COMMENT '部门名称', `major_name` varchar(32) NOT NULL COMMENT '部门主管', `telephone` varchar(32) NOT NULL  COMMENT '联系电话', `email` varchar(64) NOT NULL COMMENT '邮箱',
+PRIMARY KEY (`dept_id`) ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE `t_employee` ( `emp_id` int(11) NOT NULL auto_increment COMMENT '员工号', `emp_name` varchar(64) NOT NULL COMMENT '姓名', `dept_id` int(11) NOT NULL COMMENT '部门号', `job_name` varchar(32) NOT NULL  COMMENT '职位', `join_time` varchar(32) NOT NULL COMMENT '入职时间', `telephone` varchar(64) NOT NULL COMMENT '联系方式',
+PRIMARY KEY (`emp_id`),  CONSTRAINT `fk` FOREIGN KEY (`dept_id`) REFERENCES `t_department` (`dept_id`) ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+insert into t_department() values(1,"市场部","拉钩招聘","400-400-4008","lagou@163.com");
+insert into t_department() values(2,"销售部","拉钩教育","400-400-4002","laggou@163.com");
+
+insert into t_employee() values(1,"小王","1","客户经理","2020-06-06","132	12345678");
+insert into t_employee() values(2,"老于","1","客户经理","2019-04-27","13512345679");
+insert into t_employee() values(3,"老方","2","销售经理","2015-08-14","135	12345670");
